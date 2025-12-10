@@ -10,6 +10,11 @@ class Controller:
     def handleCreaGrafo(self,e):
         self._model.creaGrafo()
 
+        self._view.lst_result.controls.clear()
+        self._view.lst_result.controls.append(ft.Text(f"{self._model._grafo}"))
+        for edge in self._model._grafo.edges:
+            self._view.lst_result.controls.append(ft.Text(f"{edge}"))
+        self._view.update_page()
 
 
     def handleCercaRaggiungibili(self,e):

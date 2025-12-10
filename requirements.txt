@@ -1,3 +1,4 @@
 flet~=0.28.3
-mysql-connector-python~=9.5.0
 networkx~=3.5
+mysql-connector-python~=9.5.0
+geopy~=2.4.1

@@ -8,7 +8,17 @@ class Controller:
         self._model = model
 
     def handleCreaGrafo(self,e):
-        pass
+        self._model.creaGrafo()
+
+
 
     def handleCercaRaggiungibili(self,e):
         pass
+
+    def populate_dropdown(self,dd):
+        self._model.getAllFermate()
+        #Le fermate le trovo nel model, in _lista_fermate
+
+        for fermata in self._model._lista_fermate:
+            dd.options.append(ft.dropdown.Option(key=fermata.id_fermata,
+                                                 text=fermata.nome))

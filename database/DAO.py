@@ -14,7 +14,7 @@ class DAO():
         cursor = conn.cursor(dictionary=True)
         cursor.execute(query)
         for row in cursor:
-            fermata = Fermata(row["id_fermata"], row["nome"] )
+            fermata = Fermata(row["id_fermata"], row["nome"], row["coordX"], row["coordY"] )
             result.append(fermata)
         cursor.close()
         conn.close()
@@ -56,3 +56,35 @@ class DAO():
         cursor.close()
         conn.close()
         return result
+
+    @staticmethod
+    def readAllConnessioni():
+        conn = DBConnect.get_connection()
+        result = []
+        query = "SELECT * FROM connessione"
+
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(query)  # Parametro con (, )
+        for row in cursor:
+            connessione = Connessione(row["id_connessione"],
+                                      row["id_linea"],
+                                      row["id_stazP"],
+                                      row["id_stazA"])
+            result.append(connessione)
+            print(row)
+        cursor.close()
+        conn.close()
+        return result
+
+    @staticmethod
+    def readVelocita(id_linea):
+        conn = DBConnect.get_connection()
+        result = []
+        query = "SELECT * FROM linea WHERE id_linea = %s"
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(query, (id_linea, ))
+        for row in cursor:
+            result.append(row["velocita"])
+        cursor.close()
+        conn.close()
+        return result[0] # La prima riga contiene la velocità letta
